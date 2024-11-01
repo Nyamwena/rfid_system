@@ -9,11 +9,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->middleware(['auth']);
 
 //Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware(['auth']);
 Route::resource('patients', PatientController::class);
 Route::resource('medical-records', MedicalRecordController::class);
 Route::resource('healthcare-practitioners', HealthcarePractitionerController::class);

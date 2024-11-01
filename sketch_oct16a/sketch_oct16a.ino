@@ -9,7 +9,7 @@ MFRC522 rfid(SS_PIN, RST_PIN);
 
 const char* ssid = "root";
 const char* password = "12345678";
-const char* serverUrl = "http://192.168.1.141:8090/patient/assign_tag/update/";
+const char* serverUrl = "http://192.168.137.156:8090/patient/assign_tag/update/";
 
 
 WiFiClient client;

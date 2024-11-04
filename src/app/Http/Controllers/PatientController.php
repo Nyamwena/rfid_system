@@ -54,7 +54,7 @@ class PatientController extends Controller
                   'status'=>'New Patient', 'bmi'=>$bmi,'bp_systolic'=>$systolic,
                   'bp_diastolic'=>$diastolic,'height'=>$height,'weight'=>$weight]);
           }
-            return redirect()->back()->with('success', 'Patient created successfully.');
+            return redirect()->back()->with('toast_success', 'Patient created successfully.');
         }catch (\Exception $exception){
                 dd($exception->getMessage());
         }

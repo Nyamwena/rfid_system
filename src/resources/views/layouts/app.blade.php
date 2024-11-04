@@ -122,12 +122,12 @@
                                 <li><a href="index.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Dashboard 1</a></li>
                         </li>
                     </ul>
-                        <li>
-                            <a href="appointments.html">
-                                <i data-feather="calendar"></i>
-                                <span>Appointments</span>
-                            </a>
-                        </li>
+{{--                        <li>--}}
+{{--                            <a href="appointments.html">--}}
+{{--                                <i data-feather="calendar"></i>--}}
+{{--                                <span>Appointments</span>--}}
+{{--                            </a>--}}
+{{--                        </li>--}}
                         <li class="treeview">
                             <a href="#">
                                 <i data-feather="users"></i>
@@ -155,6 +155,20 @@
                             </ul>
                         </li>
 
+                    </ul>
+
+                    <ul class="sidebar-menu" data-widget="tree">
+                        <li class="treeview">
+                            <a href="#">
+                                <i data-feather="monitor"></i>
+                                <span>Admin</span>
+                                <span class="pull-right-container">
+					  <i class="fa fa-angle-right pull-right"></i>
+					</span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="{{route('admin.view')}}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Add users</a></li>
+                        </li>
                     </ul>
 
 
@@ -194,7 +208,7 @@
 </div>
 <!-- ./wrapper -->
 
-{{--@include('sweetalert::alert')--}}
+@include('sweetalert::alert')
 
 
 

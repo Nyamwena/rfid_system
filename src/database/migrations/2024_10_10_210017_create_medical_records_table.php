@@ -26,6 +26,12 @@ return new class extends Migration
             $table->double('bp_diastolic')->nullable();
             $table->date('check_in_date')->nullable();
             $table->date('check_out_date')->nullable();
+
+//            $table->double('weight')->nullable();
+//            $table->double('height')->nullable();
+//            $table->double('bmi')->nullable();
+//            $table->double('bp_systolic')->nullable();
+//            $table->double('bp_diastolic')->nullable();
             $table->timestamps();
         });
     }

@@ -21,9 +21,15 @@
                 </div>
                 <div class="box-body pt-0">
                     <h4>Story About Disease</h4>
+                    @if($patient->medical_record)
                     <p>
                         {{$patient->medical_record->description}}
                     </p>
+                    @else
+                        <p>
+                           No record found
+                        </p>
+                    @endif
                 </div>
             </div>
             <div class="row">
@@ -47,6 +53,7 @@
 
             </div>
         </div>
+        @if($patient->medical_record)
         <div class="col-xl-4 col-12">
             <div class="box">
                 <div class="box-header">
@@ -150,6 +157,7 @@
 
 
         </div>
+        @endif
     </div>
 
 

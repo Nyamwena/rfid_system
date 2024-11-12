@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('tbl_patient', function (Blueprint $table) {
             $table->id();
-            $table->string('rfid_tag')->unique();
+            $table->string('rfid_tag')->unique()->nullable();
             $table->string('title');
             $table->string('first_name');
             $table->string('last_name');

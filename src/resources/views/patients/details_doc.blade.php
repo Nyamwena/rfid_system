@@ -26,11 +26,10 @@
                                 <td>
                                     <div class="btn-group">
                                         <a class="hover-primary dropdown-toggle no-caret" data-bs-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
-{{--                                        <div class="dropdown-menu">--}}
-{{--                                            <a class="dropdown-item" href="#">View Details</a>--}}
-                                            <a class="dropdown-item" href="{{route('patient.edit_details',$patient->id)}}">Edit</a>
-{{--                                            <a class="dropdown-item" href="#">Delete</a>--}}
-                                            <a class="dropdown-item "  href="{{route('patient.assign_tag_vw', encrypt($patient->id))}}" >Assign RFID Tag</a>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="#">View Medical Records</a>
+                                            <a class="dropdown-item" href="{{route('medical.add_medical', $patient->id)}}">Add Medical Records</a>
+                                            <a class="dropdown-item" href="{{route('medical.edit_medical', $patient->id)}}">Edit Medical Records</a>
                                         </div>
                                     </div>
                                 </td>

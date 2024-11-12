@@ -33,11 +33,11 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('is-medical-practitioner', function($user){
-            return $user->hasAnyRole(['Medical Practitioner','Admin']);
+            return $user->hasAnyRoles(['Medical Practitioner','Admin']);
         });
 
         Gate::define('is-data-capture', function($user){
-            return $user->hasAnyRole(['Data Capture','Admin']);
+            return $user->hasAnyRoles(['Data Capture','Admin']);
         });
     }
 }

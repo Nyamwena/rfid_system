@@ -141,6 +141,20 @@
                                 <li><a href="{{route('patients.create')}}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Patient Details</a></li>
                             </ul>
                         </li>
+
+                    <li class="treeview">
+                        <a href="#">
+                            <i data-feather="users"></i>
+                            <span>Patients Medical Records</span>
+                            <span class="pull-right-container">
+					  <i class="fa fa-angle-right pull-right"></i>
+					</span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="{{route('medical.all')}}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>View Records</a></li>
+
+                        </ul>
+                    </li>
                         <li class="treeview">
                             <a href="#">
                                 <i data-feather="activity"></i>
@@ -151,7 +165,6 @@
                             </a>
                             <ul class="treeview-menu">
                                 <li><a href="{{route('doctor.create')}}"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Doctors</a></li>
-                                <li><a href="doctors.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Doctor Details</a></li>
                             </ul>
                         </li>
 

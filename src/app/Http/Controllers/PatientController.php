@@ -8,6 +8,7 @@ use App\Models\MedicalRecord;
 use App\Models\Patient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class PatientController extends Controller
 {
@@ -37,38 +38,35 @@ class PatientController extends Controller
     public function store(Request $request)
     {
         try {
-            $doctor_id = $request->input('doctor_id');
-            $record_type = $request->input('record_type');
-            $description = $request->input('description');
-            $bmi = $request->input('bmi');
-            $systolic = $request->input('bp_systolic');
-            $diastolic = $request->input('bp_diastolic');
-            $height = $request->input('height');
-            $weight = $request->input('weight');
 
-          $patient =  Patient::create($request->except(['_token']));
-          if($patient){
-              MedicalRecord::create(['doctor_id'=>$doctor_id,'record_type'=>$record_type,
-                  'description'=>$description,
-                  'patient_id'=>$patient->id,
-                  'status'=>'New Patient', 'bmi'=>$bmi,'bp_systolic'=>$systolic,
-                  'bp_diastolic'=>$diastolic,'height'=>$height,'weight'=>$weight]);
-          }
-            return redirect()->back()->with('toast_success', 'Patient created successfully.');
+
+            do {
+                $patient_number = substr(time(), -5) . Str::random(3);
+            } while (Patient::where('patient_number', $patient_number)->exists());
+
+            $patient = Patient::create(array_merge(
+                $request->except(['_token']),
+                ['patient_number' => $patient_number]
+            ));
+            return redirect()->back()->with('success', 'Patient created successfully.');
         }catch (\Exception $exception){
-                dd($exception->getMessage());
+            return redirect()->back()->with('toast_error',  $exception->getMessage() . '  Something Went Wrong!!!!');
         }
     }
+
+
 
     public function assign_tage_view(Request $request, $patient_id_encry)
     {
         try {
           $decrypted_id = decrypt($patient_id_encry);
               $request->session()->put('patient_id',$decrypted_id);
+             // dd($decrypted_id);
            //   dd($request->session()->get('patient_id'));
             DB::table('active_patient')->truncate();
             $active_patient = ActivePatient::create(['patient_id'=>$decrypted_id,'status'=>1]);
-          $patient = Patient::where(['id'=>$decrypted_id])->has('medical_record')->first();
+          $patient = Patient::with('medical_record')->where(['id'=>$decrypted_id])->first();
+          //dd($patient);
          // dd($patient->medical_record->doctor->first_name);
           return view('patients.assign_tag',compact('patient'));
         }catch (\Exception $exception){
@@ -93,6 +91,22 @@ class PatientController extends Controller
         }
     }
 
+    public function edit_patient($id)
+    {
+        $patient = Patient::findOrFail($id);
+        return view('patients.edit', compact('patient'));
+    }
+
+    public function update_patient(Request $request, $id)
+    {
+        try {
+            $patient = Patient::findOrFail($id);
+            $patient->update($request->except(['_token', '_method']));
+            return redirect()->back()->with('success', 'Patient details updated successfully.');
+        } catch (\Exception $exception) {
+            return redirect()->back()->with('toast_error', $exception->getMessage() . '  Something Went Wrong!!!!');
+        }
+    }
 
     /**
      * Display the specified resource.

@@ -19,7 +19,7 @@ class DataCaptureAccess
         if(Gate::allows('is-data-capture')){
             return $next($request);
         }else{
-            return redirect()->back()->with('warning', 'You are not authorised to access this resource');
+            return redirect()->route('login')->with('warning', 'You are not authorised to access this resource');
         }
     }
 }

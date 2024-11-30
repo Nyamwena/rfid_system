@@ -15,6 +15,8 @@ RUN apt-get update && apt-get install -y \
     zip \
     libcurl4-openssl-dev \
     unzip \
+    nodejs \
+    npm \
     && docker-php-ext-install pdo_mysql \
     && docker-php-ext-install mbstring \
     && docker-php-ext-install exif \
@@ -22,8 +24,11 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install bcmath \
     && docker-php-ext-install gd \
     && docker-php-ext-install zip \
-    && docker-php-ext-install curl\
+    && docker-php-ext-install curl \
     && docker-php-source delete
+
+# Install Laravel Echo Server globally
+RUN npm install -g laravel-echo-server
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
@@ -39,15 +44,7 @@ RUN mkdir -p /home/$user/.composer && \
 # Set working directory
 WORKDIR /var/www
 
-## Set the cron schedule
-#RUN echo "* * * * * cd /var/www && php artisan schedule:run >> /dev/null 2>&1" > /etc/cron.d/laravel-scheduler
-#RUN chmod 0644 /etc/cron.d/laravel-scheduler
-#RUN crontab /etc/cron.d/laravel-scheduler
-#RUN touch /var/log/cron.log
-#
-## Start the PHP-FPM service
-#CMD ["php-fpm"]
-# Run Laravel scheduler
-#CMD cron && php-fpm
+# Expose port 6001 for Laravel Echo Server
+EXPOSE 6001
 
 USER $user

@@ -25,12 +25,12 @@
                                 <td>{{$patient->mobile_number}}</td>
                                 <td>
                                     <div class="btn-group">
-                                        <a class="hover-primary dropdown-toggle no-caret" data-bs-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></a>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="#">View Medical Records</a>
-                                            <a class="dropdown-item" href="{{route('medical.add_medical', $patient->id)}}">Add Medical Records</a>
-                                            <a class="dropdown-item" href="{{route('medical.edit_medical', $patient->id)}}">Edit Medical Records</a>
-                                        </div>
+
+
+                                            <a class="btn btn-primary" href="{{route('medical.records', $patient->id)}}">View Medical Records</a>|
+                                            <a class="btn btn-primary" href="{{route('medical.add_medical', $patient->id)}}">Add Medical Records</a>|
+                                            <a class="btn btn-primary" href="{{route('medical.edit_medical', $patient->id)}}">Edit Medical Records</a>
+
                                     </div>
                                 </td>
 

@@ -46,4 +46,8 @@ Route::prefix('medicals')->name('medical.')->middleware(['auth','auth.isMedicalP
    Route::post('/save_medical',[MedicalRecordController::class,'save_medical_record'])->name('save');
    Route::get('/edit_medical/{id}/edit',[MedicalRecordController::class,'edit_medical'])->name('edit_medical');
     Route::put('/update_medical/{id}/update',[MedicalRecordController::class,'update_medical_record'])->name('update_medical');
+    Route::get('/view_medical_records/{id}/{rfid_tag?}',[MedicalRecordController::class,'view_medical_record'])->name('records');
+
+
 });
+Route::get('medicals/check-rfid/{rfid_tag}', [MedicalRecordController::class, 'checkRfid'])->name('check.rfid');

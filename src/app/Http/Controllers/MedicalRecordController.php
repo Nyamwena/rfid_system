@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\RfidTagMatched;
+use App\Models\ActivePatient;
 use App\Models\Doctor;
 use App\Models\MedicalRecord;
 use App\Models\Patient;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Mockery\Exception;
 
 class MedicalRecordController extends Controller
@@ -97,8 +100,44 @@ class MedicalRecordController extends Controller
         }
     }
 
+    public function view_medical_record($id, $rfid_tag =null){
+        try {
+            if($rfid_tag == null){
+                DB::table('active_patient')->truncate(); // Clear previous entries
+                DB::table('active_patient')->insert([
+                    'patient_id' => $id,
+                    'status' => 1
+                ]);
+                $patient = Patient::where(['id'=>$id])->first();
+            }else{
+                $patient = Patient::with('medical_record')->where(['id'=>$id,'rfid_tag'=>$rfid_tag])->first();
+            }
+
+            return view('patients.vw_medical_record',compact('patient'));
+        }catch (\Exception $exception){
+            return redirect()->back()->with('toast_error', 'Failed to update the medical record: ' . $exception->getMessage());
+        }
+    }
 
 
+
+    public function checkRfid($rfid_tag)
+    {
+        $activePatient = ActivePatient::where('status', 1)->first();
+
+        if ($activePatient) {
+            $patient = Patient::where('id', $activePatient->patient_id)
+                ->where('rfid_tag', $rfid_tag)
+                ->first();
+
+            if ($patient) {
+                broadcast(new RfidTagMatched($patient));
+                return response()->json(['success' => true, 'patient' => $patient]);
+            }
+        }
+
+        return response()->json(['success' => false]);
+    }
 
     /**
      * Show the form for creating a new resource.

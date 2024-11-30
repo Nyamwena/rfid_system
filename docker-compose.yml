@@ -19,6 +19,13 @@ services:
       - db_app-shared
     dns:
       - 8.8.8.8
+#    environment:
+#      - BROADCAST_DRIVER=pusher
+#      - PUSHER_APP_ID=local
+#      - PUSHER_APP_KEY=local
+#      - PUSHER_APP_SECRET=local
+#      - PUSHER_APP_CLUSTER=mt1
+
 
   nginx:
     image: nginx:1.17-alpine
@@ -31,6 +38,17 @@ services:
       - ./.docker/nginx:/etc/nginx/conf.d
     networks:
       - rfid_sys
+
+#  websocket:
+#    image: beyondcode/laravel-websockets
+#    container_name: rfid-websockets
+#    restart: unless-stopped
+#    ports:
+#      - 6001:6001  # WebSocket server port
+#    volumes:
+#      - ./src:/var/www
+#    networks:
+#      - rfid_sys
 
 networks:
   rfid_sys:

@@ -236,6 +236,24 @@
       <path value="$PROJECT_DIR$/src/vendor/paragonie/constant_time_encoding" />
       <path value="$PROJECT_DIR$/src/vendor/bacon/bacon-qr-code" />
       <path value="$PROJECT_DIR$/src/vendor/laravel/fortify" />
+      <path value="$PROJECT_DIR$/src/vendor/maximebf/debugbar" />
+      <path value="$PROJECT_DIR$/src/vendor/barryvdh/laravel-debugbar" />
+      <path value="$PROJECT_DIR$/src/vendor/cboden/ratchet" />
+      <path value="$PROJECT_DIR$/src/vendor/evenement/evenement" />
+      <path value="$PROJECT_DIR$/src/vendor/symfony/psr-http-message-bridge" />
+      <path value="$PROJECT_DIR$/src/vendor/pusher/pusher-php-server" />
+      <path value="$PROJECT_DIR$/src/vendor/paragonie/sodium_compat" />
+      <path value="$PROJECT_DIR$/src/vendor/fig/http-message-util" />
+      <path value="$PROJECT_DIR$/src/vendor/facade/ignition-contracts" />
+      <path value="$PROJECT_DIR$/src/vendor/react/event-loop" />
+      <path value="$PROJECT_DIR$/src/vendor/react/http" />
+      <path value="$PROJECT_DIR$/src/vendor/react/dns" />
+      <path value="$PROJECT_DIR$/src/vendor/react/cache" />
+      <path value="$PROJECT_DIR$/src/vendor/react/socket" />
+      <path value="$PROJECT_DIR$/src/vendor/react/promise" />
+      <path value="$PROJECT_DIR$/src/vendor/react/stream" />
+      <path value="$PROJECT_DIR$/src/vendor/beyondcode/laravel-websockets" />
+      <path value="$PROJECT_DIR$/src/vendor/ratchet/rfc6455" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.1" />

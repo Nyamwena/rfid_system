@@ -8,7 +8,9 @@ use App\Models\Doctor;
 use App\Models\MedicalRecord;
 use App\Models\Patient;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 use Mockery\Exception;
 
 class MedicalRecordController extends Controller
@@ -131,10 +133,12 @@ class MedicalRecordController extends Controller
                 ->first();
 
             if ($patient) {
-                broadcast(new RfidTagMatched($patient));
+                Cache::put('active_patient', $patient->id, now()->addMinutes(2));
                 return response()->json(['success' => true, 'patient' => $patient]);
             }
         }
+
+        Cache::forget('active_patient');
 
         return response()->json(['success' => false]);
     }

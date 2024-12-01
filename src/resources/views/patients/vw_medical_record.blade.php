@@ -180,25 +180,41 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/laravel-echo/1.10.0/echo.js"></script>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const echo = new Echo({
-                broadcaster: 'pusher',
-                key: 'local',
-                cluster: 'local',
-            });
+        document.addEventListener('DOMContentLoaded', function () {
+            // Function to check session state
+            document.getElementById('medical_info').classList.add('hide-med');
+            document.getElementById('disease_story').classList.add('hide-med');
+            document.getElementById('scan_to_view').textContent = "SCAN RFID CARD TO VIEW MEDICAL RECORDS";
 
-            echo.channel('rfid')
-                .listen('RfidTagMatched', (event) => {
-                    console.log(data);
-                    const patient = event.patient;
-                    // Update the UI with the patient data
-                    document.getElementById('medical_info').classList.remove('hide-med');
-                    document.getElementById('disease_story').classList.remove('hide-med');
-                    document.getElementById('scan_to_view').textContent = "Patient Found! Medical Records Loaded.";
-                });
+            function checkPatientSession() {
+                fetch('/api/check-session')
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            // Display patient information
+                            console.log('Patient session active, updating UI');
+                            console.log('Session Check Data:', data);
+                            document.getElementById('medical_info').classList.remove('hide-med');
+                            document.getElementById('disease_story').classList.remove('hide-med');
+                            document.getElementById('scan_to_view').textContent = "Patient Found! Medical Records Loaded.";
+                        } else {
+                            // Hide patient information
+                            console.log('No active session, hiding UI');
+                            document.getElementById('medical_info').classList.add('hide-med');
+                            document.getElementById('disease_story').classList.add('hide-med');
+                            document.getElementById('scan_to_view').textContent = "SCAN RFID CARD TO VIEW MEDICAL RECORDS";
+
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
+            }
+
+            // Poll every 2 seconds to check session
+            setInterval(checkPatientSession, 2000);
         });
     </script>
-{{--    <script>--}}
+
+    {{--    <script>--}}
 {{--        document.addEventListener('DOMContentLoaded', function() {--}}
 {{--            function checkRfid(rfidTag) {--}}
 {{--                fetch(`/check-rfid/${rfidTag}`)--}}

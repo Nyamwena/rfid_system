@@ -7,9 +7,9 @@
 #define RST_PIN D1
 MFRC522 rfid(SS_PIN, RST_PIN);
 
-const char* ssid = "elistair";
-const char* password = "vanivini";
-const char* serverUrl = "http://192.168.137.253:8090/patient/assign_tag/update/";
+const char* ssid = "PeppaPig";
+const char* password = "buysomethingforme#";
+const char* serverUrl = "http://192.168.184.42:8090/patient/assign_tag/update/";
 
 
 WiFiClient client;

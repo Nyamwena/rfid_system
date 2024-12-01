@@ -8,6 +8,7 @@ use App\Http\Controllers\PatientController;
 use App\Http\Controllers\UserManagementController;
 use App\Http\Middleware\MedicalPractitionerAccess;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
 
 Route::get('/', function () {
     return view('welcome');
@@ -50,4 +51,6 @@ Route::prefix('medicals')->name('medical.')->middleware(['auth','auth.isMedicalP
 
 
 });
-Route::get('medicals/check-rfid/{rfid_tag}', [MedicalRecordController::class, 'checkRfid'])->name('check.rfid');
+
+
+
